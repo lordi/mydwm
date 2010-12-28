@@ -88,7 +88,7 @@ struct Client {
 	int basew, baseh, incw, inch, maxw, maxh, minw, minh;
 	int bw, oldbw;
 	unsigned int tags;
-	Bool isfixed, isfloating, isurgent, oldstate;
+	Bool isfixed, isfloating, isurgent, oldstate, needresize;
 	Client *next;
 	Client *snext;
 	Monitor *mon;
@@ -597,6 +597,8 @@ configurerequest(XEvent *e) {
 				configure(c);
 			if(ISVISIBLE(c))
 				XMoveResizeWindow(dpy, c->win, c->x, c->y, c->w, c->h);
+			else
+				c->needresize=1;
 		}
 		else
 			configure(c);
@@ -1573,7 +1575,12 @@ showhide(Client *c) {
 	if(!c)
 		return;
 	if(ISVISIBLE(c)) { /* show clients top down */
-		XMoveWindow(dpy, c->win, c->x, c->y);
+		if(c->needresize) {
+			c->needresize=0;
+			XMoveResizeWindow(dpy, c->win, c->x, c->y, c->w, c->h);
+		} else {
+			XMoveWindow(dpy, c->win, c->x, c->y);
+		}
 		if(!c->mon->lt[c->mon->sellt]->arrange || c->isfloating)
 			resize(c, c->x, c->y, c->w, c->h, False);
 		showhide(c->snext);

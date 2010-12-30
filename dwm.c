@@ -488,7 +488,7 @@ void
 cleanup(void) {
 	Arg a = {.ui = ~0};
 	Layout foo = { "", NULL };
-	Monitor *m;
+    Monitor *m;
 
 	view(&a);
 	selmon->lt[selmon->sellt] = &foo;
@@ -731,7 +731,7 @@ drawbar(Monitor *m) {
 	drawtext(m->ltsymbol, dc.norm, False);
 	dc.x += dc.w;
 	x = dc.x;
-	if(m == selmon) { /* status is only drawn on selected monitor */
+	if(m->num == statusmon) { /* status is only drawn on specified monitor */
 		dc.w = TEXTW(stext);
 		dc.x = m->ww - dc.w;
 		if(dc.x < x) {

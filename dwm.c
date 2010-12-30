@@ -2031,9 +2031,12 @@ updatetitle(Client *c) {
 
 void
 updatestatus(void) {
+	Monitor *m;
 	if(!gettextprop(root, XA_WM_NAME, stext, sizeof(stext)))
 		strcpy(stext, "dwm-"VERSION);
-	drawbar(selmon);
+	for(m = mons; m && m->num != statusmon; m = m->next);
+	if(m)
+		drawbar(m);
 }
 
 void

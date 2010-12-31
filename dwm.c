@@ -1637,9 +1637,12 @@ tag(const Arg *arg) {
 
 void
 tagmon(const Arg *arg) {
-	if(!selmon->sel || !mons->next)
+	Client *sel = selmon->sel;
+	if(!sel || !mons->next)
 		return;
-	sendmon(selmon->sel, dirtomon(arg->i));
+	sendmon(sel, dirtomon(arg->i));
+	focusmon(arg);
+	focus(sel);
 }
 
 int

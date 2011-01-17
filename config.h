@@ -36,7 +36,8 @@ static const Layout layouts[] = {
 };
 
 /* key definitions */
-#define MODKEY Mod1Mask
+#define MODKEY Mod4Mask
+#define ALTKEY Mod1Mask
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
@@ -49,6 +50,8 @@ static const Layout layouts[] = {
 /* commands */
 static const char *dmenucmd[] = { "dmenu_run", "-fn", font, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
 static const char *termcmd[]  = { "gnome-terminal", NULL };
+static const char *notescmd[]  = { "bash", "-c", "cd /home/hannes/Desktop/sonstwas; gvim .", NULL };
+static const char *browsecmd[]  = { "nautilus", "--no-desktop", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -84,28 +87,30 @@ static Key keys[] = {
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 
-	{ MODKEY,                       XK_F2,     spawn,          {.v = dmenucmd } },
-	{ MODKEY,                       XK_F3,     spawn,          {.v = termcmd } },
-	{ MODKEY,                       XK_F4,     killclient,     {0} },
-	{ MODKEY,                       XK_Tab,    focusstack,     {.i = +1} },
-	{ MODKEY|ShiftMask,             XK_Tab,    focusstack,     {.i = -1} },
+	{ ALTKEY,                       XK_F1,     spawn,          {.v = notescmd } },
+	{ ALTKEY,                       XK_F2,     spawn,          {.v = dmenucmd } },
+	{ ALTKEY,                       XK_F3,     spawn,          {.v = termcmd } },
+	{ ALTKEY,                       XK_F4,     killclient,     {0} },
+	{ ALTKEY,                       XK_F5,     spawn,          {.v = browsecmd } },
+	{ ALTKEY,                       XK_Tab,    focusstack,     {.i = +1} },
+	{ ALTKEY|ShiftMask,             XK_Tab,    focusstack,     {.i = -1} },
 
-	{ MODKEY|ShiftMask,             XK_minus,  setmfact,       {.f = -0.05} },
-	{ MODKEY|ShiftMask,             XK_plus,   setmfact,       {.f = +0.05} },
+	{ MODKEY,                       XK_minus,  setmfact,       {.f = -0.05} },
+	{ MODKEY,                       XK_plus,   setmfact,       {.f = +0.05} },
 
-	{ MODKEY|ShiftMask,             XK_Right,  tagmon,         {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_Left,   tagmon,         {.i = -1 } },
+	{ MODKEY,                       XK_Right,  tagmon,         {.i = +1 } },
+	{ MODKEY,                       XK_Left,   tagmon,         {.i = -1 } },
 
-	{ MODKEY|ControlMask,           XK_Tab,    focusmon,       {.i = +1 } },
-	{ MODKEY|ControlMask|ShiftMask, XK_Tab,    focusmon,       {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_Right,  focusmon,       {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_Left,    focusmon,      {.i = -1 } },
 
-	{ MODKEY|ShiftMask,             XK_F1,     setlayout,      {.v = &layouts[0]} },
-	{ MODKEY|ShiftMask,             XK_F2,     setlayout,      {.v = &layouts[1]} },
-	{ MODKEY|ShiftMask,             XK_F3,     setlayout,      {.v = &layouts[2]} },
-	{ MODKEY|ShiftMask,             XK_F4,     setlayout,      {.v = &layouts[3]} },
-	{ MODKEY|ShiftMask,             XK_F5,     setlayout,      {.v = &layouts[4]} },
+	{ MODKEY,                       XK_F1,     setlayout,      {.v = &layouts[0]} },
+	{ MODKEY,                       XK_F2,     setlayout,      {.v = &layouts[1]} },
+	{ MODKEY,                       XK_F3,     setlayout,      {.v = &layouts[2]} },
+	{ MODKEY,                       XK_F4,     setlayout,      {.v = &layouts[3]} },
+	{ MODKEY,                       XK_F5,     setlayout,      {.v = &layouts[4]} },
 
-    { MODKEY,                       XK_s,      setlayout,      {.v = &layouts[3]} },
+	{ MODKEY,                       XK_s,      setlayout,      {.v = &layouts[3]} },
 	{ MODKEY,                       XK_d,      setlayout,      {.v = &layouts[4]} },
 
 };

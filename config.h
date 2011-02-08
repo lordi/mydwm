@@ -49,9 +49,10 @@ static const Layout layouts[] = {
 
 /* commands */
 static const char *dmenucmd[] = { "dmenu_run", "-fn", font, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
-static const char *termcmd[]  = { "gnome-terminal", NULL };
+static const char *termcmd[]  = { "xterm", NULL };
 static const char *notescmd[]  = { "bash", "-c", "cd /home/hannes/Desktop/sonstwas; gvim .", NULL };
 static const char *browsecmd[]  = { "nautilus", "--no-desktop", NULL };
+static const char *shutdowncmd[]  = { "gksudo", "-m", "Enter your password to shutdown the computer.", "halt", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -92,6 +93,7 @@ static Key keys[] = {
 	{ ALTKEY,                       XK_F3,     spawn,          {.v = termcmd } },
 	{ ALTKEY,                       XK_F4,     killclient,     {0} },
 	{ ALTKEY,                       XK_F5,     spawn,          {.v = browsecmd } },
+	{ ALTKEY,                       XK_F12,    spawn,          {.v = shutdowncmd } },
 	{ ALTKEY,                       XK_Tab,    focusstack,     {.i = +1} },
 	{ ALTKEY|ShiftMask,             XK_Tab,    focusstack,     {.i = -1} },
 
@@ -102,7 +104,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_Left,   tagmon,         {.i = -1 } },
 
 	{ MODKEY|ShiftMask,             XK_Right,  focusmon,       {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_Left,    focusmon,      {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_Left,   focusmon,       {.i = -1 } },
 
 	{ MODKEY,                       XK_F1,     setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_F2,     setlayout,      {.v = &layouts[1]} },

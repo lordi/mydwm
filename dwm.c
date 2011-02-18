@@ -230,6 +230,7 @@ static void zoom(const Arg *arg);
 
 /* additional layouts */
 static void grid(Monitor *);
+#include "gaplessgrid.h"
 
 /* variables */
 static const char broken[] = "broken";
@@ -1774,6 +1775,7 @@ bstackhoriz(Monitor *m) {
 }
 
 #include "grid.c"
+#include "gaplessgrid.c"
 
 void
 togglebar(const Arg *arg) {

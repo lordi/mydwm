@@ -34,6 +34,7 @@ static const Layout layouts[] = {
 	{ "HHH",      grid },
 	{ "[M]",      monocle },
 	{ "><>",      NULL },    /* no layout function means floating behavior */
+	{ NULL,       NULL },
 };
 
 /* key definitions */
@@ -67,11 +68,11 @@ static Key keys[] = {
 	{ MODKEY,                       XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_v,      view,           {0} },
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
-	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
+/*	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
-	{ MODKEY,                       XK_space,  setlayout,      {0} },
-	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
+*/
+	{ MODKEY,                       XK_f,      togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
 	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
@@ -107,11 +108,8 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_Right,  focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_Left,   focusmon,       {.i = -1 } },
 
-	{ MODKEY,                       XK_F1,     setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                       XK_F2,     setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                       XK_F3,     setlayout,      {.v = &layouts[2]} },
-	{ MODKEY,                       XK_F4,     setlayout,      {.v = &layouts[3]} },
-	{ MODKEY,                       XK_F5,     setlayout,      {.v = &layouts[4]} },
+	{ MODKEY,                       XK_space,  nextlayout,     {0} },
+	{ MODKEY|ShiftMask,             XK_space,  prevlayout,     {0} },
 
 	{ MODKEY,                       XK_s,      setlayout,      {.v = &layouts[3]} },
 	{ MODKEY,                       XK_d,      setlayout,      {.v = &layouts[4]} },

@@ -194,6 +194,8 @@ static void scan(void);
 static void sendmon(Client *c, Monitor *m);
 static void setclientstate(Client *c, long state);
 static void setlayout(const Arg *arg);
+static void prevlayout(const Arg *arg);
+static void nextlayout(const Arg *arg);
 static void setmfact(const Arg *arg);
 static void setup(void);
 static void showhide(Client *c);
@@ -390,6 +392,27 @@ applysizehints(Client *c, int *x, int *y, int *w, int *h, Bool interact) {
 			*h = MIN(*h, c->maxh);
 	}
 	return *x != c->x || *y != c->y || *w != c->w || *h != c->h;
+}
+
+/* cycle through layouts... */
+void
+nextlayout(const Arg *arg) {
+    Layout *l;
+    for (l=(Layout *)layouts;l != selmon->lt[selmon->sellt];l++);
+    if (l->symbol && (l + 1)->symbol)
+        setlayout(&((Arg) { .v = (l + 1) }));
+    else
+        setlayout(&((Arg) { .v = layouts }));
+}
+
+void
+prevlayout(const Arg *arg) {
+    Layout *l;
+    for (l=(Layout *)layouts;l != selmon->lt[selmon->sellt];l++);
+    if (l != layouts && (l - 1)->symbol)
+        setlayout(&((Arg) { .v = (l - 1) }));
+    else
+        setlayout(&((Arg) { .v = &layouts[LENGTH(layouts) - 2] }));
 }
 
 void

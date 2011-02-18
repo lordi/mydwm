@@ -29,10 +29,11 @@ static const Bool resizehints = True; /* True means respect size hints in tiled 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "[]=",      tile },    /* first entry is default */
-	{ "><>",      NULL },    /* no layout function means floating behavior */
+	{ "TTT",      bstack },
+	{ "===",      bstackhoriz },
+	{ "HHH",      grid },
 	{ "[M]",      monocle },
- 	{ "TTT",      bstack },
- 	{ "===",      bstackhoriz },
+	{ "><>",      NULL },    /* no layout function means floating behavior */
 };
 
 /* key definitions */

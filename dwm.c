@@ -226,6 +226,9 @@ static int xerrordummy(Display *dpy, XErrorEvent *ee);
 static int xerrorstart(Display *dpy, XErrorEvent *ee);
 static void zoom(const Arg *arg);
 
+/* additional layouts */
+static void grid(Monitor *);
+
 /* variables */
 static const char broken[] = "broken";
 static char stext[256];
@@ -1746,6 +1749,8 @@ bstackhoriz(Monitor *m) {
 			y = c->y + HEIGHT(c);
 	}
 }
+
+#include "grid.c"
 
 void
 togglebar(const Arg *arg) {
